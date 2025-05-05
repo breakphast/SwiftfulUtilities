@@ -115,40 +115,68 @@ public struct Utilities {
 
     /// The physical orientation of the device (portrait, landscapeLeft, etc.)
     public static var deviceOrientation: UIDeviceOrientation {
+        #if !os(visionOS)
         UIDevice.current.orientation
+        #else
+        UIDeviceOrientation.portrait
+        #endif
     }
 
     /// A Boolean value indicating whether the device is in portrait orientation.
     public static var isPortrait: Bool {
+        #if !os(visionOS)
+        true
+        #else
         UIDevice.current.orientation.isPortrait
+        #endif
     }
 
     /// A Boolean value indicating whether the device is in landscape orientation.
     public static var isLandscape: Bool {
+        #if !os(visionOS)
+        true
+        #else
         UIDevice.current.orientation.isLandscape
+        #endif
     }
 
     // MARK: UIScreen.main
 
     /// A Boolean value indicating whether the current vertical orientation of the device has a height less than 800px.
     public static var isSmallerVerticalHeight: Bool {
+        #if !os(visionOS)
         let height = isLandscape ? UIScreen.main.bounds.width : UIScreen.main.bounds.height
         return height < 800
+        #else
+        false
+        #endif
     }
 
     /// The width of the screen.
     public static var screenWidth: CGFloat {
+        #if !os(visionOS)
         UIScreen.main.bounds.width
+        #else
+        .zero
+        #endif
     }
 
     /// The height of the screen.
     public static var screenHeight: CGFloat {
+        #if !os(visionOS)
         UIScreen.main.bounds.height
+        #else
+        .zero
+        #endif
     }
 
     /// The scale factor of the screen.
     public static var screenScale: CGFloat {
+        #if !os(visionOS)
         UIScreen.main.scale
+        #else
+        .zero
+        #endif
     }
 
     // MARK: ProcessInfo.processInfo

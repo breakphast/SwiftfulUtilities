@@ -134,7 +134,7 @@ private extension LocalNotifications {
         case .time(timeInterval: let timeInterval, repeats: let repeats):
             return UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats)
 
-        #if !targetEnvironment(macCatalyst)
+        #if !targetEnvironment(macCatalyst) || !os(visionOS)
         case .location(coordinates: let coordinates, radius: let radius, notifyOnEntry: let notifyOnEntry, notifyOnExit: let notifyOnExit, repeats: let repeats):
             let region = CLCircularRegion(center: coordinates, radius: radius, identifier: UUID().uuidString)
             region.notifyOnEntry = notifyOnEntry
